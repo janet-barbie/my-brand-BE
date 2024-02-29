@@ -11,7 +11,12 @@ import {
   updateBlogs,
   deleteBlog,
 } from "../controllers/blogsController";
-import { newQuery, getQuery, getQueries } from "../controllers/queryController";
+import {
+  newQuery,
+  getQuery,
+  getQueries,
+  deleteQuery,
+} from "../controllers/queryController";
 import {
   newComment,
   getComments,
@@ -20,9 +25,9 @@ import {
 import { newLike, getLikes } from "../controllers/likesController";
 import multer, { Multer } from "multer";
 import image from "../middleware/cloudinarymiddleware";
+import {userSignupValidation} from "../middleware/userAuthentication";
 const router = Router();
-console.log("queryroutes");
-console.log("router");
+
 // Get all posts
 router.get("/blogs", getAll);
 
@@ -43,6 +48,9 @@ router.post("/queries", newQuery);
 router.get("/queries", isAdmin, getQueries);
 //get single query
 router.get("/queries/:id", isAdmin, getQuery);
+//delete query
+// Delete
+router.delete("/queries/:id", isAdmin, deleteQuery);
 //post comment
 router.post("/blogs/:id/comments", isAuthenticated, newComment);
 //get  comment
@@ -55,11 +63,11 @@ router.post("/blogs/:id/likes", isAuthenticated, newLike);
 router.get("/likes", getLikes);
 //sign up
 router.post(
-  "/signup",
+  "/signup", userSignupValidation,
   passport.authenticate("signup", { session: false }),
   async (req: Request, res: Response, next: NextFunction) => {
     console.log("post");
-    res.json({
+    return  res.status(400).json({
       message: "Signup successful",
       user: req.user,
     });

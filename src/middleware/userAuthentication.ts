@@ -1,6 +1,8 @@
 import Router, { Request, Response, NextFunction } from "express";
 import passport from "passport";
 import UserModel from "../models/model";
+import {validateUser} from "../validation"
+
 export const isAuthenticated = (
   req: any,
   res: Response,
@@ -57,3 +59,16 @@ export const isAdmin = (req: any, res: Response, next: NextFunction) => {
     }
   )(req, res, next);
 };
+
+  export const userSignupValidation =(req:Request,res:Response,next:NextFunction)=>{
+  // {name,email,password}=req.body
+  const validUser=validateUser(req.body)
+  console.log(req.body)
+  console.log(validUser)
+        if (validUser.error) {
+         return res.status(404).json({
+             error: validUser.error.details[0].message,
+           });
+        next()
+}
+}

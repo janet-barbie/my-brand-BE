@@ -9,7 +9,7 @@ export const newBlog = async (req: Request, res: Response) => {
   try {
     const valid = validatePostData(req.body);
     if (valid.error) {
-      res.status(404).json({
+      return res.status(404).json({
         error: valid.error.details[0].message,
       });
     }
@@ -18,7 +18,7 @@ export const newBlog = async (req: Request, res: Response) => {
 
     if (blogTitle) {
       console.log(blogTitle);
-      return res.status(400).send({ error: "title already exists" });
+      return res.status(400).json({ error: "title already exists" });
     } else {
       if (req.file) {
         //const base64Image = req.file.buffer.toString("base64");
@@ -36,7 +36,7 @@ export const newBlog = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -44,13 +44,13 @@ export const getBlog = async (req: Request, res: Response) => {
   const { id } = req.params;
   try {
     const blog = await Post.findOne({ _id: id });
+    console.log(blog);
     if (!blog) {
-      res.status(404).send({ error: "Blog doesn't exist!" });
-      return;
+      return res.status(404).json({ error: "Blog doesn't exist!" });
     }
-    res.send(blog);
+    return res.status(200).json({ blog:blog });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -59,8 +59,7 @@ export const updateBlogs = async (req: Request, res: Response) => {
   try {
     const blog = await Post.findOne({ _id: id });
     if (!blog) {
-      res.status(404).send({ error: "Blog doesn't exist!" });
-      return;
+      return res.status(404).json({ error: "Blog doesn't exist!" });
     }
 
     //const { title, image, intro, article } = req.body;
@@ -79,18 +78,20 @@ export const updateBlogs = async (req: Request, res: Response) => {
       blog.article = article;
     }
     await blog.save();
-    res.send(blog);
+    // res.send(blog);
+    return res.status(200).json({ blog: blog });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 export const getAll = async (req: Request, res: Response) => {
   try {
-    const blogs = await Post.find();
-    res.send(blogs);
+    const blog = await Post.find();
+    //res.send(blogs);
+    return res.status(200).json({ blog: blog });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 export const deleteBlog = async (req: Request, res: Response) => {
@@ -99,29 +100,10 @@ export const deleteBlog = async (req: Request, res: Response) => {
     const blogDelete = await Post.findByIdAndDelete(blogId);
     await Comment.deleteMany({ blog: blogId });
     if (!blogDelete) {
-      return res.status(404).send({ error: "Blog not found" });
+      return res.status(404).json({ error: "Blog not found" });
     }
-    res.status(204).send();
+    return res.status(200).json({ id: req.params.id });
   } catch (error) {
-    res.status(500).send({ error: "Internal server error" });
+    return res.status(500).json({ error: "Internal server error" });
   }
 };
-
-// imageUploadRouter.post(
-//   "/upload",
-//   upload.array("images", 5),
-//   uploadToCloudinary,
-//   async (req: Request, res: Response) => {
-//     try {
-//       const cloudinaryUrls = req.body.cloudinaryUrls;
-//       if (cloudinaryUrls.length === 0) {
-//         console.error("No Cloudinary URLs found.");
-//         return res.status(500).send("Internal Server Error");
-//       }
-//       const images = cloudinaryUrls;
-//       return res.send(images);
-//     } catch (error) {
-//       return res.status(500).json({ error });
-//     }
-//   }
-// );

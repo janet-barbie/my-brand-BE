@@ -1,0 +1,88 @@
+{
+  "swagger": "2.0",
+
+  "info": {
+    "title": "CRUD-REST-API ",
+    "description": " REST API that performs crud operations ",
+    "version": "0.0.1"
+  },
+  "host": "localhost:5000",
+  "basePath": "",
+  "tags": [
+    {
+      "name": "",
+      "description": ""
+    }
+  ],
+  "schemes": ["http"],
+  "definitions": {
+    "id": {
+      "properties": {
+        "uuid": {
+          "type": "string"
+        }
+      }
+    },
+    "post": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "image": { "type": "file" },
+        "intro": {
+          "type": "string"
+        },
+        "article": {
+          "type": "string"
+        }
+      }
+    },
+    "queries": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+
+        "email": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "comments": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "likes": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "likes": {
+          "type": "boolean"
+        }
+      }
+    }
+  }
+}

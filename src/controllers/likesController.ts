@@ -45,7 +45,7 @@ export const newLike = async (req: Request, res: Response) => {
       }
     }
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 export const getLikes = async (req: Request, res: Response) => {
@@ -62,6 +62,6 @@ export const getLikes = async (req: Request, res: Response) => {
     });
     return res.status(200).json({ bloglike, total, dislike });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };

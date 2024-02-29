@@ -4,7 +4,7 @@ const ExtractJWT = require("passport-jwt").ExtractJwt;
 import UserModel from "../models/model";
 import passport from "passport";
 import bcrypt from "bcrypt";
-
+import {validateUser} from "../validation"
 passport.use(
   "signup",
   new localStrategy(
@@ -14,6 +14,7 @@ passport.use(
       passReqToCallback: true,
     },
     async (req: any, email: string, password: string, done: any) => {
+      
       try {
         const name = req.body.name;
         const salt = await bcrypt.genSalt(10);

@@ -4,7 +4,9 @@ import mongoose from "mongoose";
 import router from "./routes/routes";
 import auth from "./auth/auth";
 import routes from "./routes/secure-routes";
-import users from "./routes/routes"
+import users from "./routes/routes";
+import swaggerUi from "swagger-ui-express";
+import * as swaggerDocument from "./swagger.json";
 dotenv.config();
 
 const app: Express = express();
@@ -23,10 +25,11 @@ mongoose
     app.use(express.urlencoded({ extended: true }));
     app.use(auth.initialize());
     app.use("/api/secure-routes", routes);
-   
-    app.use("/api/users", users)
-    
-   
+
+    app.use("/api/users", users);
+    //this.httpServer.use('/swagger',swaggerUi.serve,swaggerUi.setup(swaggerDocument))
+    app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    // app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
     console.log("server connected");
   }) //const PORT = process.env.PORT || 5000;
   .catch((error: any) => {

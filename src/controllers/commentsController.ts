@@ -26,16 +26,17 @@ export const newComment = async (req: Request, res: Response) => {
     //res.send(comments);
     return res.status(200).json({ comments });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 export const getComments = async (req: Request, res: Response) => {
   try {
-    const comment = await Comment.find({ blogId: req.params.id });
-    res.send(comment);
+    const comments = await Comment.find({ blogId: req.params.id });
+    // res.send(comment);
+    return res.status(200).json({ comments });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
@@ -44,11 +45,10 @@ export const deleteComment = async (req: Request, res: Response) => {
   try {
     const deletedComment = await Comment.deleteOne({ _id: id });
     if (deletedComment.deletedCount === 0) {
-      res.status(404).send({ error: "comment doesn't exist!" });
-      return;
+      return res.status(404).json({ error: "comment doesn't exist!" });
     }
-    res.status(204).send();
+    return res.status(200).json({ id: req.params.id });
   } catch (error) {
-    res.status(500).send({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };

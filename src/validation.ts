@@ -42,3 +42,17 @@ export const validateQuery = (query: IQuery) => {
   });
   return querySchema.validate(query);
 };
+
+export interface IUser{
+  name:string;
+  email:string;
+  password:string;
+}
+export const validateUser=(user:IUser)=>{
+  const userSchema= Joi.object({
+    name:Joi.string().required(),
+    email:Joi.string().email().required(),
+    password:Joi.string().min(8).max(15).required()
+  })
+  return userSchema.validate(user);
+}

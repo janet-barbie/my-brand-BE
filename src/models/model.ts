@@ -26,22 +26,6 @@ const UserSchema: Schema = new Schema({
   },
 });
 
-// UserSchema.pre<IUser>("save", async function (next) {
-//   const user = this;
-//   const hash = await bcrypt.hash(this.password, 10);
-
-//   this.password = hash;
-//   next();
-// });
-
-// UserSchema.methods = async function (
-//   this: IUser,
-//   password: string
-// ) {
-//   const compare = await bcrypt.compare(password, this.password);
-
-//   return compare;
-// };
 
 const UserModel = mongoose.model<IUser>("user", UserSchema);
 
