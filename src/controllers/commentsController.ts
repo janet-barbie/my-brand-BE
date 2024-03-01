@@ -10,11 +10,10 @@ export const newComment = async (req: Request, res: Response) => {
   try {
     const valid = validateComment(req.body);
     if (valid.error) {
-      res.status(404).json({
+    return  res.status(403).json({
         error: valid.error.details[0].message,
       });
     }
-    console.log(req.body);
     const comments = new Comment({
       blogId: req.params.id,
       name,

@@ -66,9 +66,10 @@ export const isAdmin = (req: any, res: Response, next: NextFunction) => {
   console.log(req.body)
   console.log(validUser)
         if (validUser.error) {
-         return res.status(404).json({
+         return res.status(400).json({
              error: validUser.error.details[0].message,
            });
-        next()
+      
 }
+return  next()
 }

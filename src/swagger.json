@@ -12,6 +12,7 @@
           "description": "Server"
       },
       {
+        "url":"https://my-brand-be-5.onrender.com",
           "description":"development"
       }
   ],
@@ -34,7 +35,7 @@
           "title": {
             "type": "string"
           },
-          "image": {
+          "profile": {
             "type": "file"
           },
           "intro": {

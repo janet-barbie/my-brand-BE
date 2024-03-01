@@ -67,7 +67,7 @@ router.post(
   passport.authenticate("signup", { session: false }),
   async (req: Request, res: Response, next: NextFunction) => {
     console.log("post");
-    return  res.status(400).json({
+    return  res.status(200).json({
       message: "Signup successful",
       user: req.user,
     });
@@ -83,7 +83,7 @@ router.post(
           console.log(info);
           const error = new Error("An error occurred.");
 
-          return next(error);
+          return res.status(404).json(info);
         }
 
         req.login(user, { session: false }, async (error) => {

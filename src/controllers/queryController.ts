@@ -21,7 +21,7 @@ export const newQuery = async (req: Request, res: Response) => {
     //res.send(query);
     return res.status(200).json({ queries: queries });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 //get query
@@ -36,7 +36,7 @@ export const getQuery = async (req: Request, res: Response) => {
     }
     // res.send(queries);
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    // return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 //get all queries
@@ -46,7 +46,7 @@ export const getQueries = async (req: Request, res: Response) => {
     // res.send(queries);
     return res.status(200).json({ queries: queries });
   } catch (error) {
-    res.status(500).json({ error: "Internal Server Error" });
+    return res.status(500).json({ error: "Internal Server Error" });
   }
 };
 //delete queries
