@@ -23,7 +23,6 @@ export const newBlog = async (req: Request, res: Response) => {
       if (req.file) {
         //const base64Image = req.file.buffer.toString("base64");
         const result = await cloudinary.uploader.upload(req.file.path);
-        console.log(req.user);
 
         const blog = new Post({
           title,

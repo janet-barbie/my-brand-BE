@@ -69,7 +69,7 @@ router.post(
     console.log("post");
     return  res.status(200).json({
       message: "Signup successful",
-      user: req.user,
+
     });
   }
 );
