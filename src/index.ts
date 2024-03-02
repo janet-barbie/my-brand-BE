@@ -9,9 +9,6 @@ import app from "./app";
 //   res.send("Express + TypeScript Server");
 // });
 
-const DB_URL = process.env.DB;
-mongoose
-  .connect(DB_URL as string)
   .then(() => {
     console.log("server connected");
     app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
