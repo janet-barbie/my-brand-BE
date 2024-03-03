@@ -10,7 +10,7 @@ router.post(
     console.log("post");
     res.json({
       message: "Signup successful",
-
+      user: req.user,
     });
   }
 );
@@ -32,7 +32,7 @@ router.post(
           const body = { _id: user._id, email: user.email };
           const token = jwt.sign({ user: body }, "TOP_SECRET");
 
-
+          return res.json({ token });
         });
       } catch (error) {
         return next(error);

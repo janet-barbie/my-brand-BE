@@ -53,7 +53,7 @@ export const isAdmin = (req: any, res: Response, next: NextFunction) => {
             .json({ error: "you are not allowed to perform this operation" });
         }
       } catch (error) {
-
+        next(error);
       }
       return next();
     }
@@ -63,7 +63,8 @@ export const isAdmin = (req: any, res: Response, next: NextFunction) => {
   export const userSignupValidation =(req:Request,res:Response,next:NextFunction)=>{
   // {name,email,password}=req.body
   const validUser=validateUser(req.body)
-
+  console.log(req.body)
+  console.log(validUser)
         if (validUser.error) {
          return res.status(400).json({
              error: validUser.error.details[0].message,
