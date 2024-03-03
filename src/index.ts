@@ -8,8 +8,7 @@ import app from "./app";
 // app.get("/", (req: Request, res: Response) => {
 //   res.send("Express + TypeScript Server");
 // });
-mongoose
-  .connect(process.env.DB as string)
+
   .then(() => {
     console.log("server connected");
     app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
