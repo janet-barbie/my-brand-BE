@@ -1,6 +1,8 @@
 
 [![codecov](https://codecov.io/github/janet-barbie/my-brand-BE/graph/badge.svg?token=FL8MBH9QF6)](https://codecov.io/github/janet-barbie/my-brand-BE)
 
+[![Node.js CI](https://github.com/janet-barbie/my-brand-BE/actions/workflows/git.yml/badge.svg)](https://github.com/janet-barbie/my-brand-BE/actions/workflows/git.yml)
+
 <h3>my-brand-BE</h3>
 
 <p><strong>My-brand-BE</strong> is a backend project about a personal brand as a developer its main goal is to establish one as a professional software developer</p>
