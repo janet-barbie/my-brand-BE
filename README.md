@@ -31,6 +31,7 @@ my brand backend -->
 <li>passport-local<li>
 <li>passport-jwt<li>
 <li>cloudinary<li>
+<li>multer</li>
 </ul>
 <h5> DevDependencies used</h5>
 <p>Here I  started by installing typescript as development dependency.also installed the @types declaration packages for the above dependicies</p>
