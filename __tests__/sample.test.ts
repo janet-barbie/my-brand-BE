@@ -15,9 +15,11 @@ import app from "../src/app";
 import dotenv from "dotenv";
 import Post from "../src/models/post";
 dotenv.config();
+
 const DB_URL = process.env.DB;
 beforeAll(async () => {
   //await mongoose.connect(DB_URL as string)
+  console.log(DB_URL);
   await mongoose.connect(DB_URL as string);
 }, 100000);
 afterAll(async () => {
