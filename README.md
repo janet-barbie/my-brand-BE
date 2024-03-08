@@ -1,8 +1,11 @@
-<!-- # my-brand-BE
-my brand backend -->
-<h3>my-brand-BE</h3><br>
 
-<p><strong>My-brand-BE</strong> is a backend project about a personal brand as a developer its main goal is to establish one as a professional software developer</p><br>
+[![codecov](https://codecov.io/github/janet-barbie/my-brand-BE/graph/badge.svg?token=FL8MBH9QF6)](https://codecov.io/github/janet-barbie/my-brand-BE)
+
+[![Node.js CI](https://github.com/janet-barbie/my-brand-BE/actions/workflows/git.yml/badge.svg)](https://github.com/janet-barbie/my-brand-BE/actions/workflows/git.yml)
+
+<h3>my-brand-BE</h3>
+
+<p><strong>My-brand-BE</strong> is a backend project about a personal brand as a developer its main goal is to establish one as a professional software developer</p>
 <h3>Description</h3>
 <p>my-brand-BE has Restful APIs that can be used to perform CRUD operations for blog posts,also for users that have signed up for your services as a software developer </p>
 <h4>Used Technologies</h4>
@@ -15,16 +18,16 @@ my brand backend -->
 </ol>
 <h4>Installation and running the project </h4>
 <p> These softwares need to be installed first</p>
-<ul>
+<ol>
 <li>Node<li>
 <li>MongoDB<li>
-</ul>
+</ol>
 <p> an application to test the API such as Insomnia</p>
 <p> created a cloudinary account and used it to upload images into the mongoDB database</p>
 <h4>install the dependices<h5>
 <p> I used NPM as package management tool to install the following dependencies and devDependicies
 <h5>Dependencies used</h5>
-<ul>
+<ol>
 <li>express<li>
 <li>mongoose<li>
 <li>passport<li>
@@ -32,7 +35,7 @@ my brand backend -->
 <li>passport-jwt<li>
 <li>cloudinary<li>
 <li>multer</li>
-</ul>
+</ol>
 <h5> DevDependencies used</h5>
 <p>Here I  started by installing typescript as development dependency.also installed the @types declaration packages for the above dependicies</p>
 <h3>How to test my project</h3>
