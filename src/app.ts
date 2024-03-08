@@ -5,6 +5,7 @@ import router from "./routes/routes";
 import auth from "./auth/auth";
 import routes from "./routes/secure-routes";
 import users from "./routes/routes";
+import cors from "cors";
 dotenv.config();
 
 const app: Express = express();
@@ -14,6 +15,7 @@ const app: Express = express();
 // });
 //const app = express();
 app.use(express.json());
+app.use(cors());
 app.use("/api", router);
 // app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
