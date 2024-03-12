@@ -1,15 +1,15 @@
 import Joi from "joi";
 export interface IPost {
   title: string;
-  // image: string;
+   profile: any;
   intro: string;
   article: string;
 }
 export const validatePostData = (post: IPost) => {
   const PostSchema = Joi.object({
-    title: Joi.string().min(5).max(15).required(),
-    //image: Joi.string().required(),
-    intro: Joi.string().min(5).max(30).required(),
+    title: Joi.string().min(5).max(25).required(),
+    profile: Joi.string(),
+    intro: Joi.string().min(5).max(50).required(),
     article: Joi.string().required(),
   });
   return PostSchema.validate(post);
