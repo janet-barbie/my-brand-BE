@@ -7,42 +7,59 @@ export const newLike = async (req: Request, res: Response) => {
   try {
     if (req.user) {
       const user = req.user as IUser;
-      const bloglikes = await Likes.findOne({
-        blogId: req.params.blogId,
+      //console.log(req)
+      const bloglikes: any = await Likes.findOne({
+        blogId: req.params.id,
         userId: user._id,
       });
+      
+      console.log(bloglikes)
       if (bloglikes) {
-        bloglikes.likes = false;
+    
+        bloglikes.likes = !bloglikes.likes;
+        
         await bloglikes.save();
-        //res.send(bloglikes);
+        //return res.send(bloglikes);
         const total = await Likes.countDocuments({
           blogId: req.params.id,
-          Likes: true,
+          likes: true,
         });
         const dislike = await Likes.countDocuments({
           blogId: req.params.id,
-          Likes: false,
+          likes: false,
         });
-        return res.status(200).json({ bloglikes, total, dislike });
-      } else {
+        return res.status(200).json({ bloglikes,total,dislike});
+       } 
+       else {
         const bloglikes = new Likes({
-          blogId: req.params.id,
-          userId: user._id,
-          name: "",
-          email: user.email,
+       blogId: req.params.id,
+           userId: user._id,
+      email: user.email,
         });
         await bloglikes.save();
-        // res.send(bloglikes);
         const total = await Likes.countDocuments({
           blogId: req.params.id,
-          Likes: true,
+          likes: true,
         });
         const dislike = await Likes.countDocuments({
           blogId: req.params.id,
-          Likes: false,
+          likes: false,
         });
-        return res.status(200).json({ bloglikes, total, dislike });
+      
+        console.log(req.user);
+        return res.status(200).json({ bloglikes,total,dislike});
       }
+     
+      // res.send(bloglikes);
+      const total = await Likes.countDocuments({
+        blogId: req.params.id,
+        likes: true,
+      });
+      const dislike = await Likes.countDocuments({
+        blogId: req.params.id,
+        likes: false,
+      });
+      return res.status(200).json({ bloglikes,total,dislike});
     }
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });
@@ -54,11 +71,11 @@ export const getLikes = async (req: Request, res: Response) => {
     // res.send(bloglike);
     const total = await Likes.countDocuments({
       blogId: req.params.id,
-      Likes: true,
+      likes: true,
     });
     const dislike = await Likes.countDocuments({
       blogId: req.params.id,
-      Likes: false,
+      likes: false,
     });
     return res.status(200).json({ bloglike, total, dislike });
   } catch (error) {

@@ -25,7 +25,7 @@ import {
 import { newLike, getLikes } from "../controllers/likesController";
 import multer, { Multer } from "multer";
 import image from "../middleware/cloudinarymiddleware";
-import {userSignupValidation} from "../middleware/userAuthentication";
+import { userSignupValidation } from "../middleware/userAuthentication";
 const router = Router();
 
 // Get all posts
@@ -38,7 +38,7 @@ router.post("/blogs", image.single("profile"), isAdmin, newBlog);
 router.get("/blogs/:id", getBlog);
 
 // Update
-router.patch("/blogs/:id", isAdmin, updateBlogs);
+router.patch("/blogs/:id", isAdmin, image.single("profile"), updateBlogs);
 
 // Delete
 router.delete("/blogs/:id", isAdmin, deleteBlog);
@@ -60,14 +60,15 @@ router.delete("/comments/:id", isAdmin, deleteComment);
 // post a like
 router.post("/blogs/:id/likes", isAuthenticated, newLike);
 //get all likes
-router.get("/likes", getLikes);
+router.get("/blogs/:id/likes", getLikes);
 //sign up
 router.post(
-  "/signup", userSignupValidation,
+  "/signup",
+  userSignupValidation,
   passport.authenticate("signup", { session: false }),
   async (req: Request, res: Response, next: NextFunction) => {
     console.log("post");
-    return  res.status(200).json({
+    return res.status(200).json({
       message: "Signup successful",
       user: req.user,
     });
@@ -93,7 +94,7 @@ router.post(
           let token = jwt.sign({ user: body }, "TOP_SECRET");
           token = "Bearer " + token;
 
-          return res.json({ token });
+          return res.json({ token, user });
         });
       } catch (error) {
         return next(error);

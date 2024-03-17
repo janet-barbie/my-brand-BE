@@ -169,8 +169,8 @@ describe("Blogs Testing", () => {
 
   it(" get single blog", async () => {
     console.log(blogId);
-    let id = "65e1df85da1f73e39028fa1a";
-    const response = await supertest(app).get(`/api/blogs/${id}`);
+    //let id = "65e1df85da1f73e39028fa1a";
+    const response = await supertest(app).get(`/api/blogs/${blogId}`);
     expect(response.statusCode).toBe(200);
   });
 

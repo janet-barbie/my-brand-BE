@@ -7,12 +7,14 @@ import cloudinary from "../cloudinary";
 export const newBlog = async (req: Request, res: Response) => {
   const { title, intro, article } = req.body;
   try {
+    console.log(req.body)
     const valid = validatePostData(req.body);
     if (valid.error) {
       return res.status(404).json({
         error: valid.error.details[0].message,
       });
     }
+    
     //check if blog title exists
     const blogTitle = await Post.findOne({ title: req.body.title });
 
@@ -23,7 +25,6 @@ export const newBlog = async (req: Request, res: Response) => {
       if (req.file) {
         //const base64Image = req.file.buffer.toString("base64");
         const result = await cloudinary.uploader.upload(req.file.path);
-        console.log(req.user);
 
         const blog = new Post({
           title,
@@ -33,6 +34,7 @@ export const newBlog = async (req: Request, res: Response) => {
         });
         await blog.save();
         return res.status(200).json({ blog: blog });
+
       }
     }
   } catch (error) {
@@ -48,7 +50,7 @@ export const getBlog = async (req: Request, res: Response) => {
     if (!blog) {
       return res.status(404).json({ error: "Blog doesn't exist!" });
     }
-    return res.status(200).json({ blog:blog });
+    return res.status(200).json({ blog: blog });
   } catch (error) {
     return res.status(500).json({ error: "Internal Server Error" });
   }
@@ -68,9 +70,11 @@ export const updateBlogs = async (req: Request, res: Response) => {
     if (title) {
       blog.title = title;
     }
-    // if (image) {
-    //   blog.image = image;
-    // }
+    if (req.file) {
+      const result = await cloudinary.uploader.upload(req.file.path);
+
+      blog.image = result.secure_url;
+    }
     if (intro) {
       blog.intro = intro;
     }
