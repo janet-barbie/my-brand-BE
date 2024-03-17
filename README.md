@@ -39,7 +39,7 @@
 <p>Here I  started by installing typescript as development dependency.also installed the @types declaration packages for the above dependicies</p>
 <h3>How to test my project</h3>
 <p> The project is implemented with Authentication and Authorization and also end points that perform CRUD functionalities</p>
-<p> I deployed my server using Render platform . You can test the project using this <a href="https://my-brand-be-2.onrender.com">Server link</a> </p>
+<p> I deployed my server using Render platform . You can test the project using this <a href="https://my-brand-be-2.onrender.com/docs">Server link</a> </p>
 
 <h3>How to test the project locally</h3>
 <p>Make sure these prequisites are installed <em>Node, MongoDB<em></p>

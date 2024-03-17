@@ -13,7 +13,7 @@ mongoose
   .connect(DB_URL as string)
   .then(() => {
     console.log("server connected");
-    app.use("/swagger", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+    app.use("/docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
   }) //const PORT = process.env.PORT || 5000;
   .catch((error: any) => {
     console.error("Error connecting to the database:", error.message);
