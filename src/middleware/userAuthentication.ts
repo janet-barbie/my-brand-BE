@@ -20,6 +20,7 @@ export const isAuthenticated = (
           });
       }
       req.user = token;
+      console.log( "good",req.user );
       return next();
     }
   )(req, res, next);
