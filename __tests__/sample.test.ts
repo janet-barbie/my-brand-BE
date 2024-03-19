@@ -121,7 +121,7 @@ describe("Authentication testing", () => {
     const response = await supertest(app)
       .post(`/api/blogs/${blogId}/comments`)
       .send({
-        name: "janet",
+        
         comment: "good work",
       })
       .set("Authorization", token);
@@ -133,7 +133,7 @@ describe("Authentication testing", () => {
     const response = await supertest(app)
       .post(`/api/blogs/${id}/comments`)
       .send({
-        name: "janet",
+      
         comment: "",
       })
       .set("Authorization", token);
@@ -225,7 +225,7 @@ describe("Blogs Testing", () => {
     const response = await supertest(app)
       .post(`/api/blogs/${id}/comments`)
       .send({
-        name: "janet",
+      
         comment: "good work",
       })
       .set("Authorization", token);
