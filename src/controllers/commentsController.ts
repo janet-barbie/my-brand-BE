@@ -16,7 +16,7 @@ export const newComment = async (req: Request, res: Response) => {
     }
     const comments = new Comment({
       blogId: req.params.id,
-      name,
+      name:user.name,
       userId: user._id,
       email: user.email,
       comment,
